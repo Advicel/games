@@ -8,9 +8,13 @@ function createMatrix(x,y){
                 id:id++,
                 x:i,
                 y:j,
+                left:false,
+                right:false,
+                both:false,
                 mine:false,
                 flag:false,
-                show:true,
+                show:false,
+                poten:false,
                 number:0
             })
         }
@@ -37,16 +41,16 @@ function getCell(matrix,x,y){
     }
     return matrix[x][y];
 }
-function getArroundCells(matrix,x,y){
+function getArroundCells(matrix,cell){
     let arroundCells = [];
     for (let i = -1; i <= 1; i++) {
         for( let j = -1; j <= 1; j++ ){
-            let cell = getCell(matrix,x+i,y+j);
+            let cellI = getCell(matrix,cell.x+i,cell.y+j);
             if(j==0 && i==0 ){
                 continue
             }
-            if(!cell) continue
-            arroundCells.push(cell);
+            if(!cellI) continue
+            arroundCells.push(cellI);
         }   
     }
     return arroundCells;
@@ -55,7 +59,7 @@ function getArroundCells(matrix,x,y){
 function createMine(matrix){
     let cell = getFreeRandomCell(matrix);
     cell.mine = true;
-    let arroundCells = getArroundCells(matrix, cell.x,cell.y);
+    let arroundCells = getArroundCells(matrix, cell);
     for (let i = 0; i < arroundCells.length; i++) {
         arroundCells[i].number+=1;        
     }
@@ -71,21 +75,36 @@ function matrixToHtml(matrix){
             const imgEllement = document.createElement('img');
             imgEllement.draggable=false;
             imgEllement.oncontextmenu =()=>false;
+            imgEllement.setAttribute("cell_id",matrix[i][j].id);
             rowEllement.appendChild(imgEllement);
             switch (true){
                 case matrix[i][j].flag:
                     imgEllement.src = 'flag.png';
+                    break;
+                case matrix[i][j].poten:
+                    imgEllement.src = "poten.png";
+                    break;
+                case !matrix[i][j].show:
+                    imgEllement.src = ("none.png");
                     break;
                 case matrix[i][j].mine:
                     imgEllement.src = 'mine.png';
                     break;
                 case matrix[i][j].number>0:
                     imgEllement.src=`number${matrix[i][j].number}.png`
-                default:
-                    imgEllement.classList.add("none");
+                default:   
                 }
         }
         gameBoard.appendChild(rowEllement);
     }
     return gameBoard;
+}
+
+function getCellById(matrix, id ){
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if(matrix[i][j].id===Number(id)) return matrix[i][j];
+        }
+    }
+    return false;
 }

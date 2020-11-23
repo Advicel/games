@@ -15,7 +15,7 @@ body{
     display: inline-block;
 }
 .sapper div{
-    margin: 0;
+    margin: 1px;
     padding: 0;
     height: 50px;
 }
