@@ -1,2 +1,3 @@
-https://advicel.github.io/games/snake/
-Ссылка на деплой
+
+[Змейка](https://advicel.github.io/games/snake/)
+[Сапёр] (https://advicel.github.io/games/Minesweeper/)
