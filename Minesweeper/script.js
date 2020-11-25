@@ -1,15 +1,40 @@
 let matrix = null;
 let running = null;
-
-init()
+let size =  10;
+let mine = 10;
+init(size,mine)
 update();
+
+const difficult = document.querySelector(".difficult");
+
+difficult.addEventListener("change",()=>{
+
+    switch (difficult.value){
+        case "easy":
+            size = 10;
+            mine = 10;
+            break;
+        case "medium":
+            size = 15;
+            mine = 30;
+            break;
+        case "hard":
+            size = 20;
+            mine = 80;
+            break;
+    }
+    init()
+
+} );
+
 
 
 function init(){
-    matrix = createMatrix(10,10);
+    matrix = createMatrix(size,size);
+    console.log(matrix)
     running = true;
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < mine; i++) {
         createMine(matrix); 
     }
     update();
@@ -27,10 +52,11 @@ function update(){
     document.querySelectorAll("img").forEach(imgEllement => {
         imgEllement.addEventListener("mousedown",mouseDownListener);
         imgEllement.addEventListener("mouseup",mouseUpListener);
+        imgEllement.addEventListener("pointerdown",pointerDownListener);
+        imgEllement.addEventListener("pointerup",pointerUpListener);
         imgEllement.addEventListener("mouseleave", mouseLeaveListener)
 
     })
-
     if(isLose(matrix)){
         alert("Вы проиграли((")
         running = false;
@@ -41,7 +67,20 @@ function update(){
     }
 
 }
-
+let timeStart;
+function pointerDownListener(event){
+    timeStart = event.timeStamp;
+}
+function pointerUpListener(event){
+    /*if(event.isPrimary) return;
+    console.log(event.timeStamp-timeStart);*/
+    const {left, right, cell} = getInfo(event);
+    if (event.timeStamp-timeStart <500){
+         return
+    }
+    rightClickHandler(cell);
+    update();
+}
 function mouseLeaveListener(event){
     const {left, right, cell} = getInfo(event);
     cell.left = false;
@@ -92,13 +131,11 @@ function leftClickHandler(cell){
     if(cell.show || cell.flag) return
     cell.show = true;
     showSpread(matrix, cell.x,cell.y);
-    console.log("left")
 }
 
 function rightClickHandler(cell){
     if(cell.show) return
     cell.flag = !cell.flag;
-    console.log("rightClick");
 }
 function bothClickHandler(cell){
     if(!cell.show || !cell.number||(cell.show && cell.mine)) return;
@@ -119,8 +156,6 @@ function bothClickHandler(cell){
             .filter(x=>!x.flag && !x.show)
             .forEach(cell => cell.poten = true);
     }
-
-    console.log("bothClick");
 }
 
 
@@ -157,11 +192,9 @@ function showSpread(matrix, x,y){
                 }
 
                 const cells = getArroundCells(matrix, cell);
-                console.log(cells);
                 for(const cell1 of cells){
                     if(cell1._marked) continue;
                     if(!cell1.flag && !cell1.mine){
-                        //console.log(cell1)
                         cell1._marked = true;
                         flag = true;
                     }
@@ -211,4 +244,12 @@ function isLose(matrix){
         
     }
     return false;
+}
+
+function info(){
+    alert(
+        "Для игры на ПК: \n левая кнопка - открыть ячейку\n правая кнопка мыши - флажок\n две зажатые кнопки мыши показывают(или открывают) соседние ячейки \n Для игры на смартфоне \n удерживайте, чтобы поставить флажок \n обынчый тап открывает ячейку "
+
+
+    )
 }
