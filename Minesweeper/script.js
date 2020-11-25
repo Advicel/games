@@ -53,6 +53,7 @@ function update(){
         imgEllement.addEventListener("mousedown",mouseDownListener);
         imgEllement.addEventListener("mouseup",mouseUpListener);
         imgEllement.addEventListener("pointerdown",pointerDownListener);
+        imgEllement.addEventListener("pointerup",pointerUpListener);
         imgEllement.addEventListener("mouseleave", mouseLeaveListener)
 
     })
@@ -67,10 +68,17 @@ function update(){
     }
 
 }
-
+let timeStart;
 function pointerDownListener(event){
-    if(event.isPrimary) return;
+    timeStart = event.timeStamp;
+}
+function pointerUpListener(event){
+    /*if(event.isPrimary) return;
+    console.log(event.timeStamp-timeStart);*/
     const {left, right, cell} = getInfo(event);
+    if (event.timeStamp-timeStart <500){
+         return
+    }
     rightClickHandler(cell);
     update();
 }
