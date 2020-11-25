@@ -7,8 +7,17 @@
     <title>Minesweeper</title>
 </head>
 <body>
-
-    <button onclick="init()">Restart</button>
+    <div class="control">
+        <button onclick="init(10,10)">Restart</button>
+        <select class="difficult" >
+            <option >Изменить сложность</option>
+            <option value="easy" onclick="init(20,20)">easy</option>
+            <option value="medium">medium</option>
+            <option value="hard">hard</option>
+        </select>
+        <button onclick="info()">?</button>
+    </div>
+    
     <div id="app"></div>
     <script src="core.js"></script>
     <script src="script.js"></script>
