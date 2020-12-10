@@ -1,4 +1,4 @@
-class GameBoard{
+export default class GameBoard{
     width = 10;
     height = 20;
     matrix=[];
@@ -30,10 +30,9 @@ class GameBoard{
         }
     }
     moveBorder(){
-        for (let i = 0; i < this.matrix.length; i++) {
-            for (let j = 0; j < this.matrix[i].length; j++) {
-                this.matrix[i][j].border = false  
-            }
+        for (let i = 0; i < this.height; i++) {
+            this.matrix[i][0].border = false;
+            this.matrix[i][this.width-1].border = false;
         }
         this.border.forEach(element=>{
             element[0] = element[0]===19 ? 0 : element[0]+1; 
@@ -41,16 +40,18 @@ class GameBoard{
         })
     }
     
-    removePlayerCar(){
-        for (let i = 0; i < this.matrix.length; i++) {
-            for (let j = 0; j < this.matrix[i].length; j++) {
-                this.matrix[i][j].car = false  
+    removeCar(car){
+        car.coordinates.forEach(element=>{
+            if(element.y>=0 && element.y<this.height){
+                this.matrix[element.y][element.x].car = false;
             }
-        }
+        })
     }
-    addPlayerCar(car){
+    addCar(car){
         car.coordinates.forEach(element => {
-            this.matrix[element.y][element.x].car = true;
+            if(element.y>=0 && element.y<this.height){
+                this.matrix[element.y][element.x].car = true;
+            }
         });
     }
 }
