@@ -22,8 +22,10 @@ document.querySelector("button").addEventListener("click", start);
 
 function start(){
     isPlaying = true;
-    const audio = new Audio("./audio/start.mp3");
+    let audio = new Audio("./audio/start.mp3");
     audio.play();
+    //audio = new Audio("../byob.mp3")
+    //audio.play();
     board = new GameBoard();
     myCar = new Car(true);
     boost = false;
@@ -88,6 +90,7 @@ function loseHandler(){
     isPlaying=false;
     let audio = new Audio("./audio/crash.mp3");
     audio.play();
+
     if(score>highScore) {
         highScore = score;
         localStorage.setItem("record", score);
@@ -136,12 +139,15 @@ function createHtmlFromMatrix(matrix){
         row.classList.add("row")
         for(let j=0;j<matrix[i].length;j++){
             const cell = document.createElement('div');
+            const cellInner = document.createElement('div');
             cell.classList.add("cell");
+            cellInner.classList.add("cellInner");
             cell.setAttribute("y",i);
             cell.setAttribute("x",j);
             cell.setAttribute("id",matrix[i][j].id);
             if(matrix[i][j].car) cell.classList.add("car")
             if(matrix[i][j].border) cell.classList.add("border")
+            cell.appendChild(cellInner);
             row.appendChild(cell);
         }
         field.appendChild(row);
