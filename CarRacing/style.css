@@ -1,0 +1,57 @@
+.cell{
+    /*background-color: black;*/
+    opacity: 0.2;
+    border: 3px solid black;
+    width: 18px;
+    height: 18px;
+    margin: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cellInner{
+    background-color: black;
+    width: 12px;
+    height: 12px;
+}
+.row{
+    display: flex;
+}
+.car, .border{
+    /*background-color: black;*/
+    opacity: 1;
+}
+.gameBoard {
+    display: inline-block;
+    flex-direction: column;
+    min-height: 10px;
+    padding: 5px;
+    border: 1px solid black;
+}
+.appWrapper{
+    padding: 5px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(43,89,238);
+}
+.appInfo{
+    border: 1px solid black;
+    background-color: rgb(168, 182, 171);
+}
+.app{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: rgb(168, 182, 171);
+}
+.scoreWrapper{
+    padding: 5px;
+}
+.scoreWrapper p{
+    text-align: center;
+    margin: 0;
+}
+.score, .highScore{
+    text-align: center;
+}
