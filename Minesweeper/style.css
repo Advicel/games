@@ -1,0 +1,45 @@
+.gameBoard{
+    border: 1px solid black;
+    min-width: 10px;
+    min-height: 10px;
+}
+body{
+    margin: 0 auto;
+}
+#app{
+    text-align: center;
+}
+.sapper{
+    border: 3px solid black;
+    padding: 5px;
+    display: inline-block;
+}
+.sapper div{
+    margin: 1px;
+    padding: 0;
+    height: 30px;
+}
+.sapper img{
+    width: 30px ;
+    height: 30px;
+    margin: 1px;
+}
+.flag{
+    border: url();
+}
+.mine{
+    border: url(mine.png);
+}
+
+@media (max-width: 700px){
+    .sapper img{
+        width: 20px ;
+        height: 20px;
+        margin: 1px;
+    }
+    .sapper div{
+        margin: 1px;
+        padding: 0;
+        height: 20px;
+    }
+}
