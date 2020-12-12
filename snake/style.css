@@ -1,0 +1,77 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+}
+body{
+    margin: 0 auto;
+    background-color: rgb(122, 155 , 4);
+}
+.s4et {
+    margin: 10px 0;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 900;
+    color: black;
+}
+.header{
+    display: flex;
+    justify-content: space-evenly;
+}
+.logo{
+    background:url(snake.jpg);
+    background-size: cover;
+    width: 220px;
+    height: 100px;
+}
+.game{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+.field{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    background-color: rgba(255, 255, 0, 0.596);
+    outline: 5px solid brown;
+    flex-wrap: wrap;
+}
+.excel{
+    width: 50px;
+    height: 50px;
+    /*border: 1px solid black;*/    
+    padding: 5px;
+}
+.snakeBody{
+    background:url(166285.jpg);
+    background-size: cover;
+    border-radius: 50%;
+}
+.snakeHead{
+    background:url(Vitka.png);
+    background-size: cover;
+    border-radius: 10%;
+}
+
+.mouse{
+    background:url(krysa.png);
+    background-size: cover;
+}
+.restart{
+    width: 100px;
+    height: 100px;
+    background:url(Flat_restart_icon.jpg);
+    background-size: cover;
+    
+}
+
+
+.bottom{
+    transform: rotate(90deg);
+}
+.top{
+    transform: rotate(-90deg);
+}
+.left{
+    transform: scale(-1,1);
+}
